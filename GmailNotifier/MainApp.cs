@@ -11,6 +11,7 @@ namespace GmailNotifier
     {
         public static void Main(string[] args)
         {
+            AccountManager.getInstance().LoadAccounts();
             Application.Run(new MailForm());
         }
     }
