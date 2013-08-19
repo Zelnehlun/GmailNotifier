@@ -16,24 +16,8 @@ namespace GmailNotifier
 
         public MailForm()
         {
-            trayMenu = new ContextMenu();
-
-            MenuItem viewInbox = new MenuItem("View Inbox");
-            viewInbox.DefaultItem = true;
-
-            trayMenu.MenuItems.Add(viewInbox);
-            trayMenu.MenuItems.Add("Check Mail Now");
-            trayMenu.MenuItems.Add("Tell me Again...");
-            trayMenu.MenuItems.Add("Options");
-            trayMenu.MenuItems.Add("About...");
-            trayMenu.MenuItems.Add("-");
-            trayMenu.MenuItems.Add("Exit", onExit);
-
-            trayIcon = new NotifyIcon();
-            trayIcon.Text = "No unread mail";
-            trayIcon.Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
-            trayIcon.ContextMenu = trayMenu;
-            trayIcon.Visible = true;
+            trayMenu = initTrayMenu();
+            trayIcon = initTrayIcon(trayMenu);
         }
 
         protected override void OnLoad(EventArgs e)
@@ -55,6 +39,34 @@ namespace GmailNotifier
             }
 
             base.Dispose(isDisposing);
+        }
+
+        private ContextMenu initTrayMenu()
+        {
+            ContextMenu trayMenu = new ContextMenu();
+            MenuItem viewInbox = new MenuItem("View Inbox");
+            viewInbox.DefaultItem = true;
+
+            trayMenu.MenuItems.Add(viewInbox);
+            trayMenu.MenuItems.Add("Check Mail Now");
+            trayMenu.MenuItems.Add("Tell me Again...");
+            trayMenu.MenuItems.Add("Options");
+            trayMenu.MenuItems.Add("About...");
+            trayMenu.MenuItems.Add("-");
+            trayMenu.MenuItems.Add("Exit", onExit);
+
+            return trayMenu;
+        }
+
+        private NotifyIcon initTrayIcon(ContextMenu trayMenu)
+        {
+            NotifyIcon trayIcon = new NotifyIcon();
+            trayIcon.Text = "No unread mail";
+            trayIcon.Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
+            trayIcon.ContextMenu = trayMenu;
+            trayIcon.Visible = true;
+
+            return trayIcon;
         }
     }
 }
