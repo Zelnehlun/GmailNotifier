@@ -1,4 +1,4 @@
 GmailNotifier
 =============
 
-.NET C# programm to check the inbox of one or more Gmail accounts
+.NET C# program to check the inbox of one or more Gmail accounts
