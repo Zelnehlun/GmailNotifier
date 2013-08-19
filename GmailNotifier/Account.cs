@@ -16,5 +16,26 @@ namespace GmailNotifier
             this.Username = username;
             this.Password = password;
         }
+
+        public override string ToString()
+        {
+            return Username;
+        }
+
+        public override int GetHashCode()
+        {
+            return Username.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is Account){
+                Account account = (Account)obj;
+
+                return account.Username.Equals(Username);
+            }
+
+            return false;
+        }
     }
 }

@@ -35,6 +35,12 @@ namespace GmailNotifier
             SaveAccounts();
         }
 
+        public void DeleteAccount(Account account)
+        {
+            Accounts.Remove(account);
+            SaveAccounts();
+        }
+
         public void LoadAccounts()
         {
             string json = FileUtil.ReadAllText(FILE);

@@ -12,16 +12,36 @@ namespace GmailNotifier
 {
     public partial class AddEditAccountForm : Form
     {
-        public string Username { get; private set; }
-        public string Password { get; private set; }
+        public string Username
+        {
+            get
+            {
+                return textBox1.Text;
+            }
+            set
+            {
+                textBox1.Text = value;
+            }
+        }
+        public string Password
+        {
+            get
+            {
+                return textBox2.Text;
+            }
+            set
+            {
+                textBox2.Text = value;
+            }
+        }
 
         public AddEditAccountForm(string title, string username, string password)
         {
+            InitializeComponent();
+
             this.Text = title;
             this.Username = username;
             this.Password = password;
-
-            InitializeComponent();
         }
 
         public AddEditAccountForm(string title) : this(title, "", "") { }
@@ -29,17 +49,11 @@ namespace GmailNotifier
         private void button2_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-
-            this.Dispose();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
-            this.Username = textBox1.Text;
-            this.Password = textBox2.Text;
-
-            this.Dispose();
         }
     }
 }
