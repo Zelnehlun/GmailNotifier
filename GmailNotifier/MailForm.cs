@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -26,6 +27,12 @@ namespace GmailNotifier
             this.ShowInTaskbar = false;
         }
 
+
+        private void onViewInbox(object sender, EventArgs e)
+        {
+            Process.Start("https://mail.google.com/mail");
+        }
+
         private void onExit(object sender, EventArgs e)
         {
             Application.Exit();
@@ -44,7 +51,7 @@ namespace GmailNotifier
         private ContextMenu initTrayMenu()
         {
             ContextMenu trayMenu = new ContextMenu();
-            MenuItem viewInbox = new MenuItem("View Inbox");
+            MenuItem viewInbox = new MenuItem("View Inbox", onViewInbox);
             viewInbox.DefaultItem = true;
 
             trayMenu.MenuItems.Add(viewInbox);
