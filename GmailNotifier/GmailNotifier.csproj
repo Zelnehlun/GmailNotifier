@@ -48,6 +48,11 @@
       <DependentUpon>AddEditAccountForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FileUtil.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="TrayForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,11 +82,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="error.ico" />
-    <Content Include="nounread.ico" />
-    <Content Include="unread.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="AddEditAccountForm.resx">
       <DependentUpon>AddEditAccountForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -90,6 +90,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

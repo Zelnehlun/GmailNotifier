@@ -39,7 +39,9 @@ namespace GmailNotifier
 
         private void onAbout(object sender, EventArgs e)
         {
+            NotifyForm notification = new NotifyForm("Written and programmed by Mr. Google");
 
+            notification.Show();
         }
 
         private void onExit(object sender, EventArgs e)
@@ -78,7 +80,7 @@ namespace GmailNotifier
         {
             NotifyIcon trayIcon = new NotifyIcon();
             trayIcon.Text = "No unread mail";
-            trayIcon.Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
+            trayIcon.Icon = new Icon("nounread.ico");
             trayIcon.ContextMenu = trayMenu;
             trayIcon.Visible = true;
 
