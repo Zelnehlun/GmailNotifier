@@ -47,8 +47,6 @@ namespace GmailNotifier
                     editAccount = new AddEditAccountForm("Edit Account");
 
                 editAccount.Username = account.Username;
-                editAccount.Password = account.Password;
-
                 DialogResult result = editAccount.ShowDialog();
 
                 if (result == DialogResult.OK)

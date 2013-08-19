@@ -35,16 +35,15 @@ namespace GmailNotifier
             }
         }
 
-        public AddEditAccountForm(string title, string username, string password)
+        public AddEditAccountForm(string title, string username)
         {
             InitializeComponent();
 
             this.Text = title;
             this.Username = username;
-            this.Password = password;
         }
 
-        public AddEditAccountForm(string title) : this(title, "", "") { }
+        public AddEditAccountForm(string title) : this(title, "") { }
 
         private void button2_Click(object sender, EventArgs e)
         {
