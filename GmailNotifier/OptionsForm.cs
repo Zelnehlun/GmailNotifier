@@ -9,17 +9,22 @@ namespace GmailNotifier
 {
     public class OptionsForm : Form
     {
+        private AddEditAccountForm addAccount;
+        private AddEditAccountForm editAccount;
         private Button button1;
         private Button button2;
         private Button button3;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private ComboBox comboBox1;
+        private Button button4;
         private ListBox listBox1;
 
         public OptionsForm()
         {
             InitializeComponent();
+
+            listBox1.DataSource = AccountManager.Instance.Accounts;
         }
 
         private void InitializeComponent()
@@ -31,6 +36,7 @@ namespace GmailNotifier
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -61,6 +67,7 @@ namespace GmailNotifier
             this.button2.TabIndex = 2;
             this.button2.Text = "Edit";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -102,9 +109,20 @@ namespace GmailNotifier
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 0;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(189, 191);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 6;
+            this.button4.Text = "OK";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // OptionsForm
             // 
-            this.ClientSize = new System.Drawing.Size(276, 204);
+            this.ClientSize = new System.Drawing.Size(276, 223);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -122,9 +140,30 @@ namespace GmailNotifier
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AddEditAccountForm addAccount = new AddEditAccountForm();
+            if (addAccount == null || addAccount.IsDisposed)
+                addAccount = new AddEditAccountForm("Add Account");
 
-            addAccount.Show();
+            DialogResult result = addAccount.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                Account account = new Account(addAccount.Username, addAccount.Password);
+
+                AccountManager.Instance.AddAccount(account);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (editAccount == null || editAccount.IsDisposed)
+                editAccount = new AddEditAccountForm("Edit Account");
+
+            editAccount.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

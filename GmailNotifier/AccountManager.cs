@@ -11,47 +11,49 @@ namespace GmailNotifier
 {
     public class AccountManager
     {
-        private static AccountManager instance;
-        private ICollection<Account> accounts = new List<Account>();
-
-        public static AccountManager getInstance()
+        public static AccountManager Instance
         {
-            if (instance == null)
-                instance = new AccountManager();
+            get
+            {
+                if (instance == null)
+                    instance = new AccountManager();
 
-            return instance;
+                return instance;
+            }
+            set
+            {
+                instance = value;
+            }
         }
+        private static AccountManager instance;
+        private const string FILE = "accounts.json";
+        public ICollection<Account> Accounts { get; private set; }
 
         public void AddAccount(Account account)
         {
-            accounts.Add(account);
+            Accounts.Add(account);
             SaveAccounts();
         }
 
         public void LoadAccounts()
         {
-            string file = getFilePath();
-            string json = FileUtil.ReadAllText(file);
+            string json = FileUtil.ReadAllText(FILE);
 
             if (json != null)
             {
-                accounts = JsonConvert.DeserializeObject<ICollection<Account>>(json);
+                Accounts = JsonConvert.DeserializeObject<ICollection<Account>>(json);
+            }
+            else
+            {
+                Accounts = new List<Account>();
             }
         }
 
         public void SaveAccounts()
         {
-            string file = getFilePath();
-            string json = JsonConvert.SerializeObject(accounts);
+            string json = JsonConvert.SerializeObject(Accounts);
 
-            FileUtil.WriteAllText(file, json);
-        }
-
-        private string getFilePath()
-        {
-            string path = Assembly.GetExecutingAssembly().Location;
-   
-            return path + "/accounts.json";
+            FileUtil.WriteAllText(FILE, json);
         }
     }
 }

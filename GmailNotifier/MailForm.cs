@@ -14,7 +14,7 @@ namespace GmailNotifier
     {
         private ContextMenu trayMenu;
         private NotifyIcon trayIcon;
-        private OptionsForm options = new OptionsForm();
+        private OptionsForm options;
 
         protected override void OnLoad(EventArgs e)
         {
@@ -31,6 +31,9 @@ namespace GmailNotifier
 
         private void onOptions(object sender, EventArgs e)
         {
+            if (options == null || options.IsDisposed)
+                options = new OptionsForm();
+
             options.Show();
         }
 
