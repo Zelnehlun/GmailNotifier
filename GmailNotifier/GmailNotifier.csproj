@@ -48,10 +48,16 @@
       <DependentUpon>AddEditAccountForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FileUtil.cs" />
-    <Compile Include="MailForm.cs">
+    <Compile Include="TrayForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainApp.cs" />
+    <Compile Include="NotifyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotifyForm.Designer.cs">
+      <DependentUpon>NotifyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,9 @@
   <ItemGroup>
     <EmbeddedResource Include="AddEditAccountForm.resx">
       <DependentUpon>AddEditAccountForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotifyForm.resx">
+      <DependentUpon>NotifyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>

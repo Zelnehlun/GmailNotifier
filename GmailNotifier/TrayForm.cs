@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace GmailNotifier
 {
-    public class MailForm : Form
+    public class TrayForm : Form
     {
         private ContextMenu trayMenu;
         private NotifyIcon trayIcon;
@@ -35,6 +35,11 @@ namespace GmailNotifier
                 options = new OptionsForm();
 
             options.Show();
+        }
+
+        private void onAbout(object sender, EventArgs e)
+        {
+
         }
 
         private void onExit(object sender, EventArgs e)
@@ -62,7 +67,7 @@ namespace GmailNotifier
             trayMenu.MenuItems.Add("Check Mail Now");
             trayMenu.MenuItems.Add("Tell me Again...");
             trayMenu.MenuItems.Add("Options", onOptions);
-            trayMenu.MenuItems.Add("About...");
+            trayMenu.MenuItems.Add("About...", onAbout);
             trayMenu.MenuItems.Add("-");
             trayMenu.MenuItems.Add("Exit", onExit);
 

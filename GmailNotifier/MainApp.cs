@@ -18,7 +18,7 @@ namespace GmailNotifier
             if (!accountManager.HasAccount())
                 accountManager.PromptAddAccount();
 
-            Application.Run(new MailForm());
+            Application.Run(new TrayForm());
         }
     }
 }
