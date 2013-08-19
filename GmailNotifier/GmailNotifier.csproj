@@ -36,8 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.cs" />
     <Compile Include="AccountManager.cs" />
     <Compile Include="AddEditAccountForm.cs">
       <SubType>Form</SubType>
@@ -45,6 +47,7 @@
     <Compile Include="AddEditAccountForm.Designer.cs">
       <DependentUpon>AddEditAccountForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileUtil.cs" />
     <Compile Include="MailForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +57,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
