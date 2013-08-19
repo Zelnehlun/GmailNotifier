@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,16 +18,20 @@ namespace GmailNotifier
         {
             trayMenu = new ContextMenu();
 
-            trayMenu.MenuItems.Add("View Inbox");
+            MenuItem viewInbox = new MenuItem("View Inbox");
+            viewInbox.DefaultItem = true;
+
+            trayMenu.MenuItems.Add(viewInbox);
             trayMenu.MenuItems.Add("Check Mail Now");
             trayMenu.MenuItems.Add("Tell me Again...");
             trayMenu.MenuItems.Add("Options");
             trayMenu.MenuItems.Add("About...");
+            trayMenu.MenuItems.Add("-");
             trayMenu.MenuItems.Add("Exit", onExit);
 
             trayIcon = new NotifyIcon();
             trayIcon.Text = "No unread mail";
-            trayIcon.Icon = new Icon(SystemIcons.Application, 40, 40);
+            trayIcon.Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
             trayIcon.ContextMenu = trayMenu;
             trayIcon.Visible = true;
         }
