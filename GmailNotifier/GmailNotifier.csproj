@@ -42,6 +42,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainApp.cs" />
+    <Compile Include="OptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -52,6 +55,11 @@
     <Content Include="error.ico" />
     <Content Include="nounread.ico" />
     <Content Include="unread.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="OptionsForm.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

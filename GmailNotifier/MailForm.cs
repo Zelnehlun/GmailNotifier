@@ -15,22 +15,24 @@ namespace GmailNotifier
         private ContextMenu trayMenu;
         private NotifyIcon trayIcon;
 
-        public MailForm()
-        {
-            trayMenu = initTrayMenu();
-            trayIcon = initTrayIcon(trayMenu);
-        }
-
         protected override void OnLoad(EventArgs e)
         {
             this.Visible = false;
             this.ShowInTaskbar = false;
+            trayMenu = initTrayMenu();
+            trayIcon = initTrayIcon(trayMenu);
         }
-
 
         private void onViewInbox(object sender, EventArgs e)
         {
             Process.Start("https://mail.google.com/mail");
+        }
+
+        private void onOptions(object sender, EventArgs e)
+        {
+            OptionsForm options = new OptionsForm();
+
+            options.Show();
         }
 
         private void onExit(object sender, EventArgs e)
@@ -57,7 +59,7 @@ namespace GmailNotifier
             trayMenu.MenuItems.Add(viewInbox);
             trayMenu.MenuItems.Add("Check Mail Now");
             trayMenu.MenuItems.Add("Tell me Again...");
-            trayMenu.MenuItems.Add("Options");
+            trayMenu.MenuItems.Add("Options", onOptions);
             trayMenu.MenuItems.Add("About...");
             trayMenu.MenuItems.Add("-");
             trayMenu.MenuItems.Add("Exit", onExit);
