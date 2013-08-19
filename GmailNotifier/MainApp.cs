@@ -11,7 +11,13 @@ namespace GmailNotifier
     {
         public static void Main(string[] args)
         {
-            AccountManager.Instance.LoadAccounts();
+            AccountManager accountManager = AccountManager.Instance;
+
+            accountManager.LoadAccounts();
+
+            if (!accountManager.HasAccount())
+                accountManager.PromptAddAccount();
+
             Application.Run(new MailForm());
         }
     }

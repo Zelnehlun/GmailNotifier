@@ -12,9 +12,6 @@ namespace GmailNotifier
 {
     public partial class OptionsForm : Form
     {
-        private AddEditAccountForm addAccount;
-        private AddEditAccountForm editAccount;
-
         public OptionsForm()
         {
             InitializeComponent();
@@ -23,18 +20,8 @@ namespace GmailNotifier
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (addAccount == null || addAccount.IsDisposed)
-                addAccount = new AddEditAccountForm("Add Account");
-
-            DialogResult result = addAccount.ShowDialog();
-
-            if (result == DialogResult.OK)
-            {
-                Account account = new Account(addAccount.Username, addAccount.Password);
-
-                AccountManager.Instance.AddAccount(account);
+            if(AccountManager.Instance.PromptAddAccount())
                 updateAccountList();
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -43,11 +30,10 @@ namespace GmailNotifier
 
             if (account != null)
             {
-                if (editAccount == null || editAccount.IsDisposed)
-                    editAccount = new AddEditAccountForm("Edit Account");
-
-                editAccount.Username = account.Username;
+                AddEditAccountForm editAccount = new AddEditAccountForm("Edit Account", account.Username);
                 DialogResult result = editAccount.ShowDialog();
+
+                editAccount.Dispose();
 
                 if (result == DialogResult.OK)
                 {
