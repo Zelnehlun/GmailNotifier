@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,8 @@ namespace GmailNotifier
             {
                 username = value;
 
-                createInbox();
+                if(password != null)
+                    createInbox();
             }
         }
         public string Password
@@ -31,9 +33,11 @@ namespace GmailNotifier
             {
                 password = SecurityUtil.Encrypt(value);
 
-                createInbox();
+                if(username != null)
+                    createInbox();
             }
         }
+        [JsonIgnore]
         public Inbox Inbox { get; private set; }
         private string username;
         private string password;
@@ -42,8 +46,6 @@ namespace GmailNotifier
         {
             this.Username = username;
             this.Password = password;
-
-            createInbox();
         }
 
         public string GetDecryptedPassword()

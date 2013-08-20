@@ -47,10 +47,12 @@
     <Compile Include="AddEditAccountForm.Designer.cs">
       <DependentUpon>AddEditAccountForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AnimationState.cs" />
     <Compile Include="Author.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="FileUtil.cs" />
     <Compile Include="Inbox.cs" />
+    <Compile Include="NotificationManager.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

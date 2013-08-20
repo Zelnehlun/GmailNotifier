@@ -39,9 +39,7 @@ namespace GmailNotifier
 
         private void onAbout(object sender, EventArgs e)
         {
-            NotifyForm notification = new NotifyForm("Written and programmed by Mr. Google");
-
-            notification.Show();
+            NotificationManager.showNotification("Written and programmed by Mr. Google");
         }
 
         private void onExit(object sender, EventArgs e)

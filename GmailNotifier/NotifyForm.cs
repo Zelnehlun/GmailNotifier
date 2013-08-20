@@ -13,87 +13,144 @@ namespace GmailNotifier
 {
     public partial class NotifyForm : Form
     {
+        public string Message
+        {
+            get
+            {
+                return this.label1.Text;
+            }
+            set
+            {
+                this.label1.Text = value;
+            }
+        }
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-        private int maxHeight;
+        private AnimationState animationState = AnimationState.STOPPED;
+        private readonly double ySpeed = 1.4;
+        private double y;
+        private readonly int normalInterval = 1;
+        private readonly int maxY;
+        private readonly int maxHeight;
         private int targetY;
 
-        public NotifyForm(string message)
+        public NotifyForm()
         {
             InitializeComponent();
 
-            this.label1.Text = message;
             Screen screen = Screen.PrimaryScreen;
             Rectangle r = screen.WorkingArea;
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(r.Width - this.Width, r.Height);
-            this.maxHeight = r.Height;
-            this.targetY = r.Height - this.Height;
-            timer.Interval = 15;
-            timer.Tick += new EventHandler(moveUp);
+            this.maxY = r.Height;
+            this.Location = new Point(r.Width - this.Width, maxY);
+            this.y = this.Location.Y;
+            this.maxHeight = this.Height;
+            timer.Tick += onTick;
+
+            this.Hide();
+        }
+
+        public void Show(string message)
+        {
+            this.Message = message;
+
+            startMoveUp();
+            this.Show();
+        }
+
+        private void startMoveUp()
+        {
+            this.animationState = AnimationState.UP;
+            this.targetY = maxY - maxHeight;
+            timer.Interval = normalInterval;
 
             timer.Start();
         }
 
-        private void moveUp(object sender, EventArgs e)
+        private void startMoveDown()
         {
-            Point p = this.Location;
-            int y = p.Y;
+            this.animationState = AnimationState.DOWN;
+            this.targetY = maxY;
+            timer.Interval = normalInterval;
+        }
 
-            if (y > targetY)
+        private void waitAnimation()
+        {
+            this.animationState = AnimationState.WAIT;
+            timer.Interval = 6000;
+        }
+
+        private void stopAnimation()
+        {
+            this.animationState = AnimationState.STOPPED;
+
+            timer.Stop();
+            this.Hide();
+        }
+
+        private void onTick(object sender, EventArgs e)
+        {
+            updateLocation();
+            updateVisibleHeight();
+            updateOpacity();
+        }
+
+        private void updateLocation()
+        {
+            if (y == targetY)
             {
-                y -= 2;
-
-                if (y < targetY)
-                    y = targetY;
-
-                this.Location = new Point(p.X, y);
-
-                updateVisibleHeight();
+                switch (animationState)
+                {
+                    case AnimationState.UP:
+                        waitAnimation();
+                        break;
+                    case AnimationState.WAIT:
+                        startMoveDown();
+                        break;
+                    case AnimationState.DOWN:
+                        stopAnimation();
+                        break;
+                }
             }
             else
             {
-                timer.Interval = 6000;
-                timer.Tick -= moveUp;
-                timer.Tick += startMoveDown;
+                if (y > targetY)
+                {
+                    move(-ySpeed);
+                }
+                else
+                {
+                    move(ySpeed);
+                }
             }
+        }
+
+        private void move(double step)
+        {
+            y += step;
+
+            if (step < 0)
+            {
+                if(y < targetY)
+                    y = targetY;
+            }
+            else
+            {
+                if(y > targetY)
+                    y = targetY;
+            }
+
+            Point p = this.Location;
+            this.Location = new Point(p.X, (int)Math.Round(y));
         }
 
         private void updateVisibleHeight()
         {
-            this.Height = maxHeight - this.Location.Y;
+            this.Height = maxY - this.Location.Y;
         }
 
-        private void startMoveDown(object sender, EventArgs e)
+        private void updateOpacity()
         {
-            timer.Interval = 15;
-            timer.Tick -= startMoveDown;
-            timer.Tick += moveDown;
-            targetY = maxHeight;
-        }
-
-        private void moveDown(object sender, EventArgs e)
-        {
-            Point p = this.Location;
-            int y = p.Y;
-
-            if (y < targetY)
-            {
-                y += 2;
-
-                if (y > targetY)
-                    y = targetY;
-
-                this.Location = new Point(p.X, y);
-
-                updateVisibleHeight();
-            }
-            else
-            {
-                timer.Tick -= moveDown;
-
-                timer.Stop();
-                this.Dispose();
-            }
+            this.Opacity = 0.9d * this.Height / maxHeight;
         }
     }
 }
