@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Timers;
+using System.Windows.Forms;
 
 namespace GmailNotifier
 {
@@ -44,13 +45,25 @@ namespace GmailNotifier
             if (!timer.Enabled)
                 timer.Start();
 
-            lock (notificationQueue)
+            if (!notification.Visible)
             {
-                notificationQueue.Enqueue(message);
+                ShowNotification(message);
+            }
+            else
+            {
+                lock (notificationQueue)
+                {
+                    notificationQueue.Enqueue(message);
+                }
             }
         }
 
         private void onElapsed(object sender, EventArgs e)
+        {
+            dequeueNotification();
+        }
+
+        private void dequeueNotification()
         {
             lock (notificationQueue)
             {
@@ -58,7 +71,10 @@ namespace GmailNotifier
                 {
                     string message = notificationQueue.Dequeue();
 
-                    ShowNotification(message);
+                    notification.Invoke((MethodInvoker)(() =>
+                    {
+                        notification.Show(message);
+                    }));
                 }
                 else
                 {

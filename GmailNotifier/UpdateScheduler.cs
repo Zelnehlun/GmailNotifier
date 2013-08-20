@@ -51,7 +51,7 @@ namespace GmailNotifier
                     Email email = emails[i];
                     string message = "»" + (i + 1) + " of " + emails.Length + " - " + email.ToString();
 
-                    NotificationManager.Instance.ShowNotification(message);
+                    NotificationManager.Instance.QueueNotification(message);
                 }
             }
         }
@@ -68,7 +68,7 @@ namespace GmailNotifier
 
                 if (inbox.CheckMailNow())
                 {
-                    if (inbox.HasNotifyEmails())
+                    if (inbox.HasEmails())
                     {
                         unreadIcon = true;
                     }

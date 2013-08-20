@@ -46,14 +46,14 @@ namespace GmailNotifier
             }
         }
 
+        public bool HasEmails()
+        {
+            return emails.Count > 0;
+        }
+
         public Email[] GetEmails()
         {
             return emails.ToArray<Email>();
-        }
-
-        public bool HasNotifyEmails()
-        {
-            return pollNotifyEmails().Any();
         }
 
         public Email[] PollNotifyEmails()
