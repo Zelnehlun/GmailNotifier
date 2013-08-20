@@ -16,6 +16,11 @@ namespace GmailNotifier
         private NotifyIcon trayIcon;
         private OptionsForm options;
 
+        public void SetIcon(string icon)
+        {
+            trayIcon.Icon = new Icon(icon + ".ico");
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             this.Visible = false;
@@ -29,6 +34,16 @@ namespace GmailNotifier
             Process.Start("https://mail.google.com/mail");
         }
 
+        private void onCheckMailNow(object sender, EventArgs e)
+        {
+            UpdateScheduler.Instance.CheckMailNow();
+        }
+
+        private void onTellMeAgain(object sender, EventArgs e)
+        {
+            UpdateScheduler.Instance.TellMeAgain(true);
+        }
+
         private void onOptions(object sender, EventArgs e)
         {
             if (options == null || options.IsDisposed)
@@ -39,7 +54,7 @@ namespace GmailNotifier
 
         private void onAbout(object sender, EventArgs e)
         {
-            NotificationManager.showNotification("Written and programmed by Mr. Google");
+            NotificationManager.Instance.ShowNotification("Written and programmed by Mr. Google");
         }
 
         private void onExit(object sender, EventArgs e)
@@ -64,8 +79,8 @@ namespace GmailNotifier
             viewInbox.DefaultItem = true;
 
             trayMenu.MenuItems.Add(viewInbox);
-            trayMenu.MenuItems.Add("Check Mail Now");
-            trayMenu.MenuItems.Add("Tell me Again...");
+            trayMenu.MenuItems.Add("Check Mail Now", onCheckMailNow);
+            trayMenu.MenuItems.Add("Tell me Again...", onTellMeAgain);
             trayMenu.MenuItems.Add("Options", onOptions);
             trayMenu.MenuItems.Add("About...", onAbout);
             trayMenu.MenuItems.Add("-");

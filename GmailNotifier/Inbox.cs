@@ -10,8 +10,8 @@ namespace GmailNotifier
 {
     public class Inbox
     {
-        public readonly ICollection<Email> NewEmails;
         public string ErrorMessage { get; private set; }
+        private readonly ICollection<Email> emails;
         private readonly string username;
         private readonly string password;
 
@@ -19,7 +19,7 @@ namespace GmailNotifier
         {
             this.username = username;
             this.password = password;
-            this.NewEmails = new List<Email>();
+            this.emails = new List<Email>();
 
             CheckMailNow();
         }
@@ -46,14 +46,26 @@ namespace GmailNotifier
             }
         }
 
-        public int GetNewEmailCount()
+        public Email[] GetEmails()
         {
-            return NewEmails.Count;
+            return emails.ToArray<Email>();
         }
 
-        public IEnumerable<Email> PollNotifyEmails()
+        public bool HasNotifyEmails()
         {
-            foreach (Email email in NewEmails)
+            return pollNotifyEmails().Any();
+        }
+
+        public Email[] PollNotifyEmails()
+        {
+            IEnumerable<Email> emails = pollNotifyEmails();
+
+            return emails.ToArray<Email>();
+        }
+
+        private IEnumerable<Email> pollNotifyEmails()
+        {
+            foreach (Email email in emails)
             {
                 if (!email.Notified)
                 {
@@ -72,8 +84,8 @@ namespace GmailNotifier
             {
                 Email email = fetchEmail(entry, ns);
 
-                if (!NewEmails.Contains(email))
-                    NewEmails.Add(email);
+                if (!emails.Contains(email))
+                    emails.Add(email);
             }
         }
 

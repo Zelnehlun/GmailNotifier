@@ -23,7 +23,7 @@ namespace GmailNotifier
             this.Issued = issued;
             this.Author = author;
             this.Notified = false;
-            this.TO_STRING = Title + ":" + Summary + ":" + Issued + ":" + Author;
+            this.TO_STRING = generateContent();
             this.HASH_CODE = TO_STRING.GetHashCode();
         }
 
@@ -49,6 +49,24 @@ namespace GmailNotifier
             }
 
             return false;
+        }
+
+        private string generateContent()
+        {
+            string format = "";
+
+            if (Issued.Day == DateTime.Now.Day)
+            {
+                format = "HH:mm";
+            }
+            else
+            {
+                format = "MMM dd";
+            }
+
+            return
+                String.Format("{0:" + format + "}", Issued) + " <b>" + Author.Name + "</b><br>" +
+                "<i>" + Summary + "</i>";
         }
     }
 }

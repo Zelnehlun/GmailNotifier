@@ -9,6 +9,8 @@ namespace GmailNotifier
 {
     public static class MainApp
     {
+        public static TrayForm Tray { get; private set; }
+
         public static void Main(string[] args)
         {
             AccountManager accountManager = AccountManager.Instance;
@@ -18,7 +20,13 @@ namespace GmailNotifier
             if (!accountManager.HasAccount())
                 accountManager.PromptAddAccount();
 
-            Application.Run(new TrayForm());
+            UpdateScheduler updateScheduler = UpdateScheduler.Instance;
+
+            updateScheduler.Start();
+
+            Tray = new TrayForm();
+
+            Application.Run(Tray);
         }
     }
 }
