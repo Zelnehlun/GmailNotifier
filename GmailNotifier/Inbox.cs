@@ -12,8 +12,8 @@ namespace GmailNotifier
     {
         public readonly ICollection<Email> NewEmails;
         public string ErrorMessage { get; private set; }
-        private string username;
-        private string password;
+        private readonly string username;
+        private readonly string password;
 
         public Inbox(string username, string password)
         {

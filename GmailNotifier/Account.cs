@@ -8,7 +8,19 @@ namespace GmailNotifier
 {
     public class Account
     {
-        public string Username { get; set; }
+        public string Username
+        {
+            get
+            {
+                return username;
+            }
+            set
+            {
+                username = value;
+
+                createInbox();
+            }
+        }
         public string Password
         {
             get
@@ -18,14 +30,20 @@ namespace GmailNotifier
             set
             {
                 password = SecurityUtil.Encrypt(value);
+
+                createInbox();
             }
         }
+        public Inbox Inbox { get; private set; }
+        private string username;
         private string password;
 
         public Account(string username, string password)
         {
             this.Username = username;
             this.Password = password;
+
+            createInbox();
         }
 
         public string GetDecryptedPassword()
@@ -52,6 +70,11 @@ namespace GmailNotifier
             }
 
             return false;
+        }
+
+        private void createInbox()
+        {
+            this.Inbox = new Inbox(Username, GetDecryptedPassword());
         }
     }
 }
