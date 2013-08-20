@@ -20,7 +20,7 @@ namespace GmailNotifier
             this.username = username;
             this.password = password;
             this.emails = new List<Email>();
-
+            
             CheckMailNow();
         }
 

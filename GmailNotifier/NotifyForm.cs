@@ -13,17 +13,6 @@ namespace GmailNotifier
 {
     public partial class NotifyForm : Form
     {
-        public string Message
-        {
-            get
-            {
-                return this.label1.Text;
-            }
-            set
-            {
-                this.label1.Text = value;
-            }
-        }
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         private AnimationState animationState = AnimationState.STOPPED;
         private readonly double ySpeed = 1.4;
@@ -51,7 +40,7 @@ namespace GmailNotifier
 
         public void Show(string message)
         {
-            this.Message = message;
+            this.label1.Text = message;
 
             startMoveUp();
             this.Show();

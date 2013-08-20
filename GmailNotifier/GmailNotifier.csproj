@@ -49,6 +49,7 @@
     </Compile>
     <Compile Include="AnimationState.cs" />
     <Compile Include="Author.cs" />
+    <Compile Include="Credentials.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="FileUtil.cs" />
     <Compile Include="Inbox.cs" />

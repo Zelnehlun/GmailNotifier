@@ -49,6 +49,11 @@ namespace GmailNotifier
             if (json != null)
             {
                 Accounts = JsonConvert.DeserializeObject<ICollection<Account>>(json);
+
+                foreach (Account account in Accounts)
+                {
+                    account.TrySetupInbox();
+                }
             }
             else
             {

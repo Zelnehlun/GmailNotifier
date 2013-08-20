@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Timers;
 
 namespace GmailNotifier
@@ -25,7 +25,7 @@ namespace GmailNotifier
         }
         private static NotificationManager instance;
         private Queue<string> notificationQueue = new Queue<string>();
-        private Timer timer = new Timer();
+        private System.Timers.Timer timer = new System.Timers.Timer();
         private NotifyForm notification = new NotifyForm();
 
         private NotificationManager()

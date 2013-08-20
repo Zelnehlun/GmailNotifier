@@ -43,18 +43,15 @@ namespace GmailNotifier
 
             foreach (Account account in accountManager.Accounts)
             {
-                Inbox inbox = account.Inbox;
+                Inbox inbox = account.GetInbox();
                 Email[] emails = all ? inbox.GetEmails() : inbox.PollNotifyEmails();
 
                 for (int i = 0; i < emails.Length; i++)
                 {
                     Email email = emails[i];
-                    string message =
-                        "<html>" +
-                        "<span style='color:red;'>&raquo;</span>" + i + " of " + emails.Length + " - " + email.ToString() +
-                        "</html>";
+                    string message = "»" + (i + 1) + " of " + emails.Length + " - " + email.ToString();
 
-                    NotificationManager.Instance.QueueNotification(message);
+                    NotificationManager.Instance.ShowNotification(message);
                 }
             }
         }
@@ -67,7 +64,7 @@ namespace GmailNotifier
 
             foreach (Account account in accountManager.Accounts)
             {
-                Inbox inbox = account.Inbox;
+                Inbox inbox = account.GetInbox();
 
                 if (inbox.CheckMailNow())
                 {

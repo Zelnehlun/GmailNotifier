@@ -9,58 +9,56 @@ namespace GmailNotifier
 {
     public class Account
     {
-        public string Username
-        {
-            get
-            {
-                return username;
-            }
-            set
-            {
-                username = value;
+        public Credentials Credentials { get; set; }
+        private Inbox inbox;
 
-                if(password != null)
-                    createInbox();
-            }
-        }
-        public string Password
-        {
-            get
-            {
-                return password;
-            }
-            set
-            {
-                password = SecurityUtil.Encrypt(value);
-
-                if(username != null)
-                    createInbox();
-            }
-        }
-        [JsonIgnore]
-        public Inbox Inbox { get; private set; }
-        private string username;
-        private string password;
+        public Account() { }
 
         public Account(string username, string password)
         {
-            this.Username = username;
-            this.Password = password;
+            this.Credentials = new Credentials(username, password);
+
+            TrySetupInbox();
         }
 
-        public string GetDecryptedPassword()
+        public string GetUsername()
         {
-            return SecurityUtil.Decrypt(password);
+            return Credentials.Username;
+        }
+
+        public void SetUsername(string username)
+        {
+            Credentials.Username = username;
+
+            TrySetupInbox();
+        }
+
+        public void SetEncryptedPassword(string password)
+        {
+            Credentials.SetEncryptedPassword(password);
+
+            TrySetupInbox();
+        }
+
+        public void TrySetupInbox()
+        {
+            if (Credentials != null && Credentials.Username != null && Credentials.Password != null)
+                this.inbox = new Inbox(Credentials.Username, SecurityUtil.Decrypt(Credentials.Password));
+        }
+
+        public Inbox GetInbox()
+        {
+            return inbox;
         }
 
         public override string ToString()
         {
-            return Username;
+            return Credentials.Username;
         }
 
         public override int GetHashCode()
         {
-            return Username.GetHashCode();
+            return Credentials.Username.GetHashCode();
         }
 
         public override bool Equals(object obj)
@@ -68,15 +66,10 @@ namespace GmailNotifier
             if(obj is Account){
                 Account account = (Account)obj;
 
-                return account.Username.Equals(Username);
+                return account.Credentials.Equals(Credentials);
             }
 
             return false;
-        }
-
-        private void createInbox()
-        {
-            this.Inbox = new Inbox(Username, GetDecryptedPassword());
         }
     }
 }

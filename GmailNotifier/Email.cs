@@ -64,9 +64,7 @@ namespace GmailNotifier
                 format = "MMM dd";
             }
 
-            return
-                String.Format("{0:" + format + "}", Issued) + " <b>" + Author.Name + "</b><br>" +
-                "<i>" + Summary + "</i>";
+            return String.Format("{0:" + format + "}", Issued) + " " + Author.Name + "\n" + Summary;
         }
     }
 }

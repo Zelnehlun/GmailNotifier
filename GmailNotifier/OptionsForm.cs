@@ -30,16 +30,15 @@ namespace GmailNotifier
 
             if (account != null)
             {
-                AddEditAccountForm editAccount = new AddEditAccountForm("Edit Account", account.Username);
+                AddEditAccountForm editAccount = new AddEditAccountForm("Edit Account", account.GetUsername());
                 DialogResult result = editAccount.ShowDialog();
 
                 editAccount.Dispose();
 
                 if (result == DialogResult.OK)
                 {
-                    account.Username = editAccount.Username;
-                    account.Password = editAccount.Password;
-
+                    account.SetUsername(editAccount.Username);
+                    account.SetEncryptedPassword(editAccount.Password);
                     AccountManager.Instance.SaveAccounts();
                     updateAccountList();
                 }
