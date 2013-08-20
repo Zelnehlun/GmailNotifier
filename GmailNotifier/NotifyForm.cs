@@ -146,10 +146,5 @@ namespace GmailNotifier
         {
             this.Opacity = 0.9d * this.Height / maxHeight;
         }
-
-        private void NotifyForm_Load(object sender, EventArgs e)
-        {
-            UpdateScheduler.Instance.CheckMailNow();
-        }
     }
 }

@@ -31,7 +31,7 @@ namespace GmailNotifier
 
         private NotificationManager()
         {
-            timer.Interval = 5000;
+            timer.Interval = 4000;
             timer.Elapsed += onElapsed;
         }
 

@@ -27,6 +27,8 @@ namespace GmailNotifier
             this.ShowInTaskbar = false;
             trayMenu = initTrayMenu();
             trayIcon = initTrayIcon(trayMenu);
+
+            UpdateScheduler.Instance.CheckMailNow();
         }
 
         private void onViewInbox(object sender, EventArgs e)
