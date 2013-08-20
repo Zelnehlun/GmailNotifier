@@ -47,7 +47,10 @@
     <Compile Include="AddEditAccountForm.Designer.cs">
       <DependentUpon>AddEditAccountForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Author.cs" />
+    <Compile Include="Email.cs" />
     <Compile Include="FileUtil.cs" />
+    <Compile Include="Inbox.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -80,6 +83,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AddEditAccountForm.resx">
