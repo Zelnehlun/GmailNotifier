@@ -11,7 +11,8 @@ namespace GmailNotifier
     public class Inbox
     {
         public string ErrorMessage { get; private set; }
-        private readonly ICollection<Email> emails;
+        private IEnumerable<Email> emails = Enumerable.Empty<Email>();
+        private readonly NotifiedEmails notifiedEmails = new NotifiedEmails();
         private readonly string username;
         private readonly string password;
 
@@ -19,7 +20,6 @@ namespace GmailNotifier
         {
             this.username = username;
             this.password = password;
-            this.emails = new List<Email>();
             
             CheckMailNow();
         }
@@ -33,8 +33,7 @@ namespace GmailNotifier
                 webRequest.Credentials = new NetworkCredential(username, password);
                 WebResponse webResponse = webRequest.GetResponse();
                 XElement xmlFeed = XElement.Load(webResponse.GetResponseStream());
-
-                fetchEmails(xmlFeed);
+                emails = fetchEmails(xmlFeed);
 
                 return true;
             }
@@ -48,7 +47,7 @@ namespace GmailNotifier
 
         public bool HasEmails()
         {
-            return emails.Count > 0;
+            return emails.Any();
         }
 
         public Email[] GetEmails()
@@ -67,16 +66,16 @@ namespace GmailNotifier
         {
             foreach (Email email in emails)
             {
-                if (!email.Notified)
+                if (!notifiedEmails.IsNotifiedEmail(email))
                 {
-                    email.Notified = true;
+                    notifiedEmails.AddNotifiedEmail(email);
 
                     yield return email;
                 }
             }
         }
 
-        private void fetchEmails(XElement xmlFeed)
+        private IEnumerable<Email> fetchEmails(XElement xmlFeed)
         {
             XNamespace ns = xmlFeed.Name.Namespace;
 
@@ -84,8 +83,7 @@ namespace GmailNotifier
             {
                 Email email = fetchEmail(entry, ns);
 
-                if (!emails.Contains(email))
-                    emails.Add(email);
+                yield return email;
             }
         }
 

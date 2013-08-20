@@ -54,6 +54,7 @@
     <Compile Include="FileUtil.cs" />
     <Compile Include="Inbox.cs" />
     <Compile Include="NotificationManager.cs" />
+    <Compile Include="NotifiedEmails.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
