@@ -49,7 +49,7 @@ namespace GmailNotifier
                 for (int i = 0; i < emails.Length; i++)
                 {
                     Email email = emails[i];
-                    string message = "»" + (i + 1) + " of " + emails.Length + " - " + email.ToString();
+                    string message = (i + 1) + " of " + emails.Length + " - " + email.ToString();
 
                     NotificationManager.Instance.QueueNotification(message);
                 }
