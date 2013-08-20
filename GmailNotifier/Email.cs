@@ -12,6 +12,7 @@ namespace GmailNotifier
         public readonly string Summary;
         public readonly DateTime Issued;
         public readonly Author Author;
+        public bool Notified { get; set; }
         private readonly string TO_STRING;
         private readonly int HASH_CODE;
 
@@ -21,6 +22,7 @@ namespace GmailNotifier
             this.Summary = summary;
             this.Issued = issued;
             this.Author = author;
+            this.Notified = false;
             this.TO_STRING = Title + ":" + Summary + ":" + Issued + ":" + Author;
             this.HASH_CODE = TO_STRING.GetHashCode();
         }
