@@ -89,12 +89,12 @@ namespace GmailNotifier
 
         private void onTick(object sender, EventArgs e)
         {
-            updateLocation();
+            updateAnimationState();
             updateVisibleHeight();
             updateOpacity();
         }
 
-        private void updateLocation()
+        private void updateAnimationState()
         {
             if (y == targetY)
             {
@@ -113,14 +113,19 @@ namespace GmailNotifier
             }
             else
             {
-                if (y > targetY)
-                {
-                    move(-ySpeed);
-                }
-                else
-                {
-                    move(ySpeed);
-                }
+                updateLocation();
+            }
+        }
+
+        private void updateLocation()
+        {
+            if (y > targetY)
+            {
+                move(-ySpeed);
+            }
+            else
+            {
+                move(ySpeed);
             }
         }
 
