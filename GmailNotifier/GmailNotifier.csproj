@@ -73,6 +73,7 @@
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SecurityUtil.cs" />
+    <Compile Include="UpdateScheduler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">

@@ -21,7 +21,7 @@ namespace GmailNotifier
 
                 return instance;
             }
-            set
+            private set
             {
                 instance = value;
             }
