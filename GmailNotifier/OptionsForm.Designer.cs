@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.checkInterval = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -39,12 +39,12 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.notificationInterval = new System.Windows.Forms.NumericUpDown();
+            this.animationSpeed = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.checkInterval)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationInterval)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.animationSpeed)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -56,27 +56,28 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Check Interval (s)";
             // 
-            // numericUpDown1
+            // checkInterval
             // 
-            this.numericUpDown1.Increment = new decimal(new int[] {
+            this.checkInterval.Increment = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.numericUpDown1.Location = new System.Drawing.Point(130, 9);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.checkInterval.Location = new System.Drawing.Point(130, 9);
+            this.checkInterval.Maximum = new decimal(new int[] {
             3600,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(47, 20);
-            this.numericUpDown1.TabIndex = 1;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.checkInterval.Name = "checkInterval";
+            this.checkInterval.Size = new System.Drawing.Size(47, 20);
+            this.checkInterval.TabIndex = 1;
+            this.checkInterval.Value = new decimal(new int[] {
             60,
             0,
             0,
             0});
+            this.checkInterval.ValueChanged += new System.EventHandler(this.checkInterval_ValueChanged);
             // 
             // label2
             // 
@@ -164,55 +165,57 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Animation speed";
             // 
-            // numericUpDown2
+            // notificationInterval
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(130, 41);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
+            this.notificationInterval.Location = new System.Drawing.Point(130, 41);
+            this.notificationInterval.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
+            this.notificationInterval.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(47, 20);
-            this.numericUpDown2.TabIndex = 7;
-            this.numericUpDown2.Value = new decimal(new int[] {
+            this.notificationInterval.Name = "notificationInterval";
+            this.notificationInterval.Size = new System.Drawing.Size(47, 20);
+            this.notificationInterval.TabIndex = 7;
+            this.notificationInterval.Value = new decimal(new int[] {
             4,
             0,
             0,
             0});
+            this.notificationInterval.ValueChanged += new System.EventHandler(this.notificationInterval_ValueChanged);
             // 
-            // numericUpDown3
+            // animationSpeed
             // 
-            this.numericUpDown3.DecimalPlaces = 1;
-            this.numericUpDown3.Increment = new decimal(new int[] {
+            this.animationSpeed.DecimalPlaces = 1;
+            this.animationSpeed.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numericUpDown3.Location = new System.Drawing.Point(130, 72);
-            this.numericUpDown3.Maximum = new decimal(new int[] {
+            this.animationSpeed.Location = new System.Drawing.Point(130, 72);
+            this.animationSpeed.Maximum = new decimal(new int[] {
             3,
             0,
             0,
             0});
-            this.numericUpDown3.Minimum = new decimal(new int[] {
+            this.animationSpeed.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(47, 20);
-            this.numericUpDown3.TabIndex = 8;
-            this.numericUpDown3.Value = new decimal(new int[] {
+            this.animationSpeed.Name = "animationSpeed";
+            this.animationSpeed.Size = new System.Drawing.Size(47, 20);
+            this.animationSpeed.TabIndex = 8;
+            this.animationSpeed.Value = new decimal(new int[] {
             14,
             0,
             0,
             65536});
+            this.animationSpeed.ValueChanged += new System.EventHandler(this.animationSpeed_ValueChanged);
             // 
             // OptionsForm
             // 
@@ -221,14 +224,14 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(264, 244);
-            this.Controls.Add(this.numericUpDown3);
-            this.Controls.Add(this.numericUpDown2);
+            this.Controls.Add(this.animationSpeed);
+            this.Controls.Add(this.notificationInterval);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.checkInterval);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -236,10 +239,10 @@
             this.Name = "OptionsForm";
             this.ShowIcon = false;
             this.Text = "Gmail Notifier Options";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkInterval)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationInterval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.animationSpeed)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,7 +251,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown checkInterval;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -258,7 +261,7 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.NumericUpDown notificationInterval;
+        private System.Windows.Forms.NumericUpDown animationSpeed;
     }
 }

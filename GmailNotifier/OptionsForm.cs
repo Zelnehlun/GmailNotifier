@@ -66,5 +66,20 @@ namespace GmailNotifier
                 updateAccountList();
             }
         }
+
+        private void checkInterval_ValueChanged(object sender, EventArgs e)
+        {
+            Options.Instance.CheckInterval = (int)checkInterval.Value;
+        }
+
+        private void notificationInterval_ValueChanged(object sender, EventArgs e)
+        {
+            Options.Instance.NotificationInterval = (int)notificationInterval.Value;
+        }
+
+        private void animationSpeed_ValueChanged(object sender, EventArgs e)
+        {
+            Options.Instance.AnimationSpeed = (double)animationSpeed.Value;
+        }
     }
 }
