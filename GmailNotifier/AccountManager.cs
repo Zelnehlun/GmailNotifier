@@ -44,12 +44,10 @@ namespace GmailNotifier
 
         public void LoadAccounts()
         {
-            string json = FileUtil.ReadAllText(FILE);
+            Accounts = FileUtil.DeserializeJson<ICollection<Account>>(FILE);
 
-            if (json != null)
+            if (Accounts != null)
             {
-                Accounts = JsonConvert.DeserializeObject<ICollection<Account>>(json);
-
                 foreach (Account account in Accounts)
                 {
                     account.TrySetupInbox();
@@ -63,9 +61,7 @@ namespace GmailNotifier
 
         public void SaveAccounts()
         {
-            string json = JsonConvert.SerializeObject(Accounts);
-
-            FileUtil.WriteAllText(FILE, json);
+            FileUtil.SerializeJson(FILE, Accounts);
         }
 
         public bool HasAccount()
