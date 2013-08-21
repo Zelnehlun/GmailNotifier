@@ -28,8 +28,14 @@ namespace GmailNotifier
 
         private UpdateScheduler()
         {
-            timer.Interval = 60000;
             timer.Elapsed += onCheckMail;
+
+            SetCheckIntervalSeconds(Options.Instance.CheckInterval);
+        }
+
+        public void SetCheckIntervalSeconds(int checkInterval)
+        {
+            timer.Interval = checkInterval * 1000;
         }
 
         public void Start()

@@ -15,7 +15,6 @@ namespace GmailNotifier
     {
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         private AnimationState animationState = AnimationState.STOPPED;
-        private readonly double ySpeed = 1.4;
         private double y;
         private readonly int normalInterval = 1;
         private readonly int maxY;
@@ -65,7 +64,7 @@ namespace GmailNotifier
         private void waitAnimation()
         {
             this.animationState = AnimationState.WAIT;
-            timer.Interval = 6000;
+            timer.Interval = Options.Instance.NotificationVisible * 1000;
         }
 
         private void stopAnimation()
@@ -108,13 +107,15 @@ namespace GmailNotifier
 
         private void updateLocation()
         {
+            double step = Options.Instance.AnimationSpeed;
+
             if (y > targetY)
             {
-                move(-ySpeed);
+                move(-step);
             }
             else
             {
-                move(ySpeed);
+                move(step);
             }
         }
 

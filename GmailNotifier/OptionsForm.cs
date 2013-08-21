@@ -16,6 +16,16 @@ namespace GmailNotifier
         {
             InitializeComponent();
             updateAccountList();
+            setSettingsToOptions();
+        }
+
+        private void setSettingsToOptions()
+        {
+            Options options = Options.Instance;
+            this.checkInterval.Value = options.CheckInterval;
+            this.notificationVisible.Value = options.NotificationVisible;
+            this.notificationInterval.Value = options.NotificationInterval;
+            this.animationSpeed.Value = (decimal)options.AnimationSpeed;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -80,6 +90,17 @@ namespace GmailNotifier
         private void animationSpeed_ValueChanged(object sender, EventArgs e)
         {
             Options.Instance.AnimationSpeed = (double)animationSpeed.Value;
+        }
+
+        private void notificationVisible_ValueChanged(object sender, EventArgs e)
+        {
+            Options.Instance.NotificationVisible = (int)notificationVisible.Value;
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            Options.Reset();
+            setSettingsToOptions();
         }
     }
 }

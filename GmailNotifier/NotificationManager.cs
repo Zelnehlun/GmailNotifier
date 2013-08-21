@@ -31,8 +31,14 @@ namespace GmailNotifier
 
         private NotificationManager()
         {
-            timer.Interval = 4000;
             timer.Elapsed += onElapsed;
+
+            SetNotificationIntervalSeconds(Options.Instance.NotificationInterval);
+        }
+
+        public void SetNotificationIntervalSeconds(int notificationInterval)
+        {
+            timer.Interval = notificationInterval * 1000;
         }
 
         public void ShowNotification(string message)

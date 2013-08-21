@@ -47,6 +47,20 @@ namespace GmailNotifier
             {
                 checkInterval = value;
 
+                UpdateScheduler.Instance.SetCheckIntervalSeconds(value);
+                Save();
+            }
+        }
+        public int NotificationVisible
+        {
+            get
+            {
+                return notificationVisible;
+            }
+            set
+            {
+                notificationVisible = value;
+
                 Save();
             }
         }
@@ -60,11 +74,13 @@ namespace GmailNotifier
             {
                 notificationInterval = value;
 
+                NotificationManager.Instance.SetNotificationIntervalSeconds(value);
                 Save();
             }
         }
         private double animationSpeed = 1.4;
         private int checkInterval = 60;
+        private int notificationVisible = 6;
         private int notificationInterval = 4;
 
         public static void Load()
@@ -78,6 +94,11 @@ namespace GmailNotifier
         public static void Save()
         {
             FileUtil.SerializeJson(FILE, instance);
+        }
+
+        public static void Reset()
+        {
+            instance = new Options();
         }
     }
 }
