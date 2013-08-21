@@ -28,11 +28,7 @@ namespace GmailNotifier
         {
             try
             {
-                WebRequest webRequest = WebRequest.Create(@"https://mail.google.com/mail/feed/atom");
-                webRequest.PreAuthenticate = true;
-                webRequest.Credentials = new NetworkCredential(username, password);
-                WebResponse webResponse = webRequest.GetResponse();
-                XElement xmlFeed = XElement.Load(webResponse.GetResponseStream());
+                XElement xmlFeed = fetchXmlFeed();
                 emails = fetchEmails(xmlFeed);
 
                 if (!emails.Any())
@@ -51,6 +47,11 @@ namespace GmailNotifier
         public bool HasEmails()
         {
             return emails.Any();
+        }
+
+        public int GetEmailAmount()
+        {
+            return emails.Count();
         }
 
         public Email[] GetEmails()
@@ -114,6 +115,16 @@ namespace GmailNotifier
             string authorEmail = author.Element(ns + "email").Value;
 
             return new Author(authorName, authorEmail);
+        }
+
+        private XElement fetchXmlFeed()
+        {
+            WebRequest webRequest = WebRequest.Create(@"https://mail.google.com/mail/feed/atom");
+            webRequest.PreAuthenticate = true;
+            webRequest.Credentials = new NetworkCredential(username, password);
+            WebResponse webResponse = webRequest.GetResponse();
+
+            return XElement.Load(webResponse.GetResponseStream());
         }
     }
 }

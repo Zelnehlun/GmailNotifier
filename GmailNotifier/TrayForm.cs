@@ -16,7 +16,36 @@ namespace GmailNotifier
         private NotifyIcon trayIcon;
         private OptionsForm options;
 
-        public void SetIcon(string icon)
+        public void SetIcon(bool errorIcon, bool unreadIcon)
+        {
+            if (errorIcon)
+            {
+                setIcon("error");
+            }
+            else if (unreadIcon)
+            {
+                setIcon("unread");
+            }
+            else
+            {
+                setIcon("nounread");
+            }
+        }
+
+        public void SetTooltip(int totalEmails)
+        {
+            if (totalEmails > 0)
+            {
+                string conversation = (totalEmails == 1 ? "conversation" : "conversations");
+                trayIcon.Text = totalEmails + " unread " + conversation;
+            }
+            else
+            {
+                trayIcon.Text = "No unread mail";
+            }
+        }
+
+        private void setIcon(string icon)
         {
             trayIcon.Icon = new Icon(icon + ".ico");
         }

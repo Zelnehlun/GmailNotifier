@@ -74,6 +74,7 @@ namespace GmailNotifier
         public void CheckMailNow()
         {
             AccountManager accountManager = AccountManager.Instance;
+            int totalEmails = 0;
             bool errorIcon = false;
             bool unreadIcon = false;
 
@@ -83,10 +84,11 @@ namespace GmailNotifier
 
                 if (inbox.CheckMailNow())
                 {
-                    if (inbox.HasEmails())
-                    {
+                    int emailAmount = inbox.GetEmailAmount();
+                    totalEmails += emailAmount;
+
+                    if (emailAmount > 0)
                         unreadIcon = true;
-                    }
                 }
                 else
                 {
@@ -94,20 +96,9 @@ namespace GmailNotifier
                 }
             }
 
-            if (errorIcon)
-            {
-                MainApp.Tray.SetIcon("error");
-            }
-            else if (unreadIcon)
-            {
-                MainApp.Tray.SetIcon("unread");
-            }
-            else
-            {
-                MainApp.Tray.SetIcon("nounread");
-            }
-
             TellMeAgain(false);
+            MainApp.Tray.SetIcon(errorIcon, unreadIcon);
+            MainApp.Tray.SetTooltip(totalEmails);
         }
 
         private void onCheckMail(object sender, EventArgs e)
