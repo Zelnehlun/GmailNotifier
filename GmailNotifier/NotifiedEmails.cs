@@ -19,5 +19,10 @@ namespace GmailNotifier
         {
             notifiedEmails.Add(email.GetHashCode());
         }
+
+        public void ClearNotifiedEmails()
+        {
+            notifiedEmails.Clear();
+        }
     }
 }

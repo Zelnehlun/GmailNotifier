@@ -35,6 +35,9 @@ namespace GmailNotifier
                 XElement xmlFeed = XElement.Load(webResponse.GetResponseStream());
                 emails = fetchEmails(xmlFeed);
 
+                if (!emails.Any())
+                    notifiedEmails.ClearNotifiedEmails();
+
                 return true;
             }
             catch (Exception ex)
