@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.checkInterval = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -76,24 +74,6 @@
             0});
             this.checkInterval.ValueChanged += new System.EventHandler(this.checkInterval_ValueChanged);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 74);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Language";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(101, 71);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 21);
-            this.comboBox1.TabIndex = 3;
-            this.comboBox1.Text = "English";
-            // 
             // groupBox1
             // 
             this.groupBox1.AutoSize = true;
@@ -102,7 +82,7 @@
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.listBox1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 129);
+            this.groupBox1.Location = new System.Drawing.Point(12, 102);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(235, 120);
             this.groupBox1.TabIndex = 4;
@@ -262,12 +242,9 @@
             // 
             this.groupBox2.AutoSize = true;
             this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.comboBox1);
             this.groupBox2.Controls.Add(this.animationSpeed);
-            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.notificationVisible);
             this.groupBox2.Controls.Add(this.notificationInterval);
             this.groupBox2.Controls.Add(this.label3);
@@ -275,16 +252,16 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(324, 113);
+            this.groupBox2.Size = new System.Drawing.Size(324, 84);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Settings";
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(243, 71);
+            this.button4.Location = new System.Drawing.Point(253, 102);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(83, 23);
             this.button4.TabIndex = 12;
             this.button4.Text = "Reset";
             this.button4.UseVisualStyleBackColor = true;
@@ -296,7 +273,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(352, 259);
+            this.ClientSize = new System.Drawing.Size(343, 258);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -320,8 +298,6 @@
         #endregion
 
         private System.Windows.Forms.NumericUpDown checkInterval;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
