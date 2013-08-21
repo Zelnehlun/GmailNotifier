@@ -40,20 +40,29 @@ namespace GmailNotifier
         public void TellMeAgain(bool all)
         {
             AccountManager accountManager = AccountManager.Instance;
+            bool hasEmails = false;
 
             foreach (Account account in accountManager.Accounts)
             {
                 Inbox inbox = account.GetInbox();
-                Email[] emails = all ? inbox.GetEmails() : inbox.PollNotifyEmails();
 
-                for (int i = 0; i < emails.Length; i++)
+                if (inbox.HasEmails())
                 {
-                    Email email = emails[i];
-                    string message = (i + 1) + " of " + emails.Length + " - " + email.ToString();
+                    Email[] emails = all ? inbox.GetEmails() : inbox.PollNotifyEmails();
+                    hasEmails = true;
 
-                    NotificationManager.Instance.QueueNotification(message);
+                    for (int i = 0; i < emails.Length; i++)
+                    {
+                        Email email = emails[i];
+                        string message = "<span style='color:red;'>»</span> " + (i + 1) + " of " + emails.Length + " - " + email.ToString();
+
+                        NotificationManager.Instance.QueueNotification(message);
+                    }
                 }
             }
+
+            if (!hasEmails && all)
+                NotificationManager.Instance.ShowNotification("Your inbox contains no unread conversations.");
         }
 
         public void CheckMailNow()

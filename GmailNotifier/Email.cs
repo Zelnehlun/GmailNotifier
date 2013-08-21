@@ -62,7 +62,12 @@ namespace GmailNotifier
                 format = "MMM dd";
             }
 
-            return String.Format("{0:" + format + "}", Issued) + " " + Author.Name + "\n" + Summary;
+            string shortTitle = Title;
+
+            if (shortTitle.Length > 50)
+                shortTitle = shortTitle.Substring(0, 50) + "...";
+
+            return String.Format("{0:" + format + "}", Issued) + " <b>" + Author.Name + "<br>" + shortTitle + "</b><br><span style='font-size:95%;'><i>" + Summary + "</i></span>";
         }
     }
 }

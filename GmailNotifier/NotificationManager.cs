@@ -37,7 +37,7 @@ namespace GmailNotifier
 
         public void ShowNotification(string message)
         {
-            notification.Show(message);
+            notification.Show(wrapFontSize(message));
         }
 
         public void QueueNotification(string message)
@@ -73,7 +73,7 @@ namespace GmailNotifier
 
                     notification.Invoke((MethodInvoker)(() =>
                     {
-                        notification.Show(message);
+                        ShowNotification(message);
                     }));
                 }
                 else
@@ -81,6 +81,11 @@ namespace GmailNotifier
                     timer.Stop();
                 }
             }
+        }
+
+        private string wrapFontSize(string message)
+        {
+            return "<span style='font-size:82%;'>" + message + "</span>";
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿namespace GmailNotifier
+﻿using HtmlRenderer;
+namespace GmailNotifier
 {
     partial class NotifyForm
     {
@@ -30,7 +31,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotifyForm));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.HtmlLabel();
+            this.label1 = new HtmlRenderer.HtmlLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,9 +49,12 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(51, 12);
+            this.label1.AutoSize = false;
+            this.label1.BackColor = System.Drawing.SystemColors.Window;
+            this.label1.BaseStylesheet = null;
+            this.label1.Location = new System.Drawing.Point(50, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(297, 44);
+            this.label1.Size = new System.Drawing.Size(310, 60);
             this.label1.TabIndex = 2;
             this.label1.Text = "label1";
             // 
@@ -79,6 +83,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.HtmlLabel label1;
+        private HtmlLabel label1;
     }
 }
